@@ -34,28 +34,68 @@ node app.js
 
 ## Endpoints creados
 
-| Método | Ruta                         | Descripción                           |
-|--------|------------------------------|---------------------------------------|
-| POST   | /api/ofertas                 | Crear una oferta laboral              |
-| GET    | /api/ofertas                 | Listar todas las ofertas              |
-| PUT    | /api/ofertas/:id             | Editar una oferta                     |
-| PATCH  | /api/ofertas/estado/:id      | Cambiar estado (activa/inactiva)      |
-| PATCH  | /api/ofertas/remove/:id      | Simular eliminación (desactivar)    
-                           |
-|--------|------------------------------|---------------------------------------|
-| POST   | /api/postulacion             | Crear una postulacion                 |
-| GET    | /api/postulacion             | Listar  todas postulaciones           |
-| PUT    | /api/postulacion/:id         | Editar una postulacion                |
-| PATCH  | /api/postulacion/estado/:id  | Cambiar estado (activa/inactiva)      |
-| PATCH  | /api/postulacion/remove/:id  | Simular eliminación (desactivar)      |
+### Ofertas Laborales
 
-## Pruebas realizadas con:
+| Método | Ruta                              | Descripción                           |
+|--------|-----------------------------------|---------------------------------------|
+| POST   | /api/ofertaLaboral                | Crear una oferta laboral              |
+| GET    | /api/ofertaLaboral                | Listar todas las ofertas              |
+| GET    | /api/ofertaLaboral/:id            | Obtener una oferta por ID             |
+| PUT    | /api/ofertaLaboral/:id            | Editar una oferta                     |
+| DELETE | /api/ofertaLaboral/:id            | Eliminar una oferta                   |
 
-- Se usó **Thunder Client** para probar cada endpoint
-- Se incluye archivo `.json` con la colección
+### Usuarios
 
-## 
+| Método | Ruta                              | Descripción                           |
+|--------|-----------------------------------|---------------------------------------|
+| POST   | /api/usuarioRoutes                | Crear un usuario                      |
+| GET    | /api/usuarioRoutes                | Listar todos los usuarios             |
+| GET    | /api/usuarioRoutes/:id            | Obtener un usuario por ID             |
+| PUT    | /api/usuarioRoutes/:id            | Editar un usuario                     |
+| DELETE | /api/usuarioRoutes/:id            | Eliminar un usuario                   |
 
-Desarrollado por: Arturo Chacón Rios 
+### Postulaciones
+
+| Método | Ruta                              | Descripción                           |
+|--------|-----------------------------------|---------------------------------------|
+| POST   | /api/postulacion                  | Crear una postulación                 |
+| GET    | /api/postulacion                  | Listar todas las postulaciones        |
+| PUT    | /api/postulacion                  | Editar una postulación                |
+| DELETE | /api/postulacion                  | Eliminar una postulación              |
+
+### Antecedentes Laborales
+
+| Método | Ruta                              | Descripción                           |
+|--------|-----------------------------------|---------------------------------------|
+| POST   | /api/antecedentesLaborales        | Crear un antecedente laboral          |
+| GET    | /api/antecedentesLaborales        | Listar todos los antecedentes         |
+| GET    | /api/antecedentesLaborales/:id    | Obtener un antecedente por ID         |
+| PUT    | /api/antecedentesLaborales/:id    | Editar un antecedente                 |
+| DELETE | /api/antecedentesLaborales/:id    | Eliminar un antecedente               |
+
+### Antecedentes Académicos
+
+| Método | Ruta                              | Descripción                           |
+|--------|-----------------------------------|---------------------------------------|
+| POST   | /api/antecedentesAcademicos       | Crear un antecedente académico        |
+| GET    | /api/antecedentesAcademicos       | Listar todos los antecedentes         |
+| GET    | /api/antecedentesAcademicos/:id   | Obtener un antecedente por ID         |
+| PUT    | /api/antecedentesAcademicos/:id   | Editar un antecedente                 |
+| DELETE | /api/antecedentesAcademicos/:id   | Eliminar un antecedente               |
+
+## Documentación Swagger
+
+- Accede a la documentación interactiva en:  
+  [http://localhost:3001/api-docs](http://localhost:3001/api-docs)
+
+## Pruebas realizadas con
+
+- **Thunder Client** para probar cada endpoint.
+- Se incluye archivo `.json` con la colección de pruebas.
+
+---
+
+**Desarrollado por:**  
+Arturo Chacón Rios  
 Instituto Profesional IPSS – 2° Año  
 Ramo: Desarrollo Backend

@@ -11,7 +11,7 @@ const controller = require('../controllers/antecedentesLaboralesController');
 
 /**
  * @swagger
- * /api/antecedentesLaborales:
+ * /:
  *   get:
  *     summary: Obtiene todos los antecedentes laborales
  *     tags: [AntecedentesLaborales]
@@ -25,7 +25,7 @@ router.get('/', (req, res, next) => controller.getAll(req, res, next));
 
 /**
  * @swagger
- * /api/antecedentesLaborales:
+ * /create:
  *   post:
  *     summary: Crea un nuevo antecedente laboral
  *     tags: [AntecedentesLaborales]
@@ -54,7 +54,7 @@ router.post('/', (req, res, next) => controller.create(req, res, next));
 
 /**
  * @swagger
- * /api/antecedentesLaborales/{id}:
+ * /id:
  *   get:
  *     summary: Obtiene un antecedente laboral por ID
  *     tags: [AntecedentesLaborales]
@@ -78,7 +78,7 @@ router.get('/:id', (req, res, next) => controller.getById(req, res, next));
 
 /**
  * @swagger
- * /api/antecedentesLaborales/{id}:
+ * /update/id:
  *   put:
  *     summary: Actualiza un antecedente laboral
  *     tags: [AntecedentesLaborales]
@@ -113,7 +113,7 @@ router.put('/:id', (req, res, next) => controller.update(req, res, next));
 
 /**
  * @swagger
- * /api/antecedentesLaborales/{id}:
+ * /renove/id:
  *   delete:
  *     summary: Elimina un antecedente laboral
  *     tags: [AntecedentesLaborales]
