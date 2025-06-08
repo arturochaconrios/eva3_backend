@@ -1,16 +1,24 @@
-const express = require('express'); 
-const bodyParser = require('body-parser'); 
-const dotenv = require('dotenv'); 
-const ofertaRoutes = require('./routes/ofertaRoutes');   
-// Cargar variables de entorno 
-dotenv.config({ path: './config/.env' }); 
-const app = express(); 
-app.use(bodyParser.json()); 
+const swaggerJSDoc = require('swagger-jsdoc');
 
-// Usar rutas 
-    app.use('/api/ofertas', ofertaRoutes); 
-// Puerto 
-const PORT = process.env.PORT || 3000; 
-    app.listen(PORT, () => { 
-        console.log(`Servidor corriendo en http://localhost:${PORT}`); 
-}); 
+const swaggerDefinition = {
+    openapi: '3.0.0',
+    info: {
+        title: 'API de Postulaciones',
+        version: '1.0.0',
+        description: 'Documentación de la API para el sistema de postulaciones, usuarios, ofertas laborales y postulaciones.',
+    },
+    servers: [
+        {
+            url: 'http://localhost:3000/api',
+            description: 'Servidor de desarrollo'
+        }
+    ],
+};
+
+const options = {
+    swaggerDefinition,
+    apis: ['./routes/*.js'], // Ruta a los archivos donde se encuentran las anotaciones de Swagger  
+}
+
+const swaggerSpec = swaggerJSDoc(options)
+module.exports = swaggerSpec;

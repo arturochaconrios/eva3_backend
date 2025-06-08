@@ -2,6 +2,15 @@ const express = require('express');
 const router = express.Router();
 const ofertaController = require('../controllers/ofertacontroller');
 
+/**
+ * @swagger
+ * /ofertaRoutes:
+ *   get:
+ *     summary: Obtiene todas las ofertas
+ *     responses:
+ *       200:
+ *         description: Lista de ofertas
+ */
 // POST: Crear oferta
 router.post('/', ofertaController.crearOferta);
 

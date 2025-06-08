@@ -1,4 +1,4 @@
-Evaluación Unidad 3 - Backend API REST
+eva3_backend - Backend API REST
 Este proyecto corresponde a la evaluación de la unidad 3 para el ramo de Desarrollo Backend. Se desarrolla una API RESTful enfocada en el perfil de Reclutador, permitiendo gestionar la entidad oferta_laboral. en esta oportunidad de agrega Swagger
 
 Tecnologías utilizadas
@@ -9,7 +9,7 @@ dotenv
 Thunder Client (para pruebas)
 Visual Studio Code
 Estructura
-Desarrollo-Back-eva2/ ├── config/ │ ├── .env │ ├── db.js │ └── database.sql ├── controllers/ │ └── ofertaController.js ├── routes/ │ └── ofertaRoutes.js ├── app.js ├── package-lock.json ├── package.json └── README.md
+eva3_backend/ ├── config/ │ ├── .env │ ├── db.js │ └── database.sql ├── controllers/ │ └── ofertaController.js └── postulacioncontroller.js └── usuariocontroller.js├── routes/ │ └── ofertaRoutes.js └── postulacionRoutes.js └── usuarioRoutes.js├── app.js ├── package-lock.json ├── package.json ├── swagger.js└── README.md
 
 Instalación
 Crear reoositorio y archivos
@@ -39,8 +39,15 @@ node app.js
 | POST   | /api/ofertas                 | Crear una oferta laboral              |
 | GET    | /api/ofertas                 | Listar todas las ofertas              |
 | PUT    | /api/ofertas/:id             | Editar una oferta                     |
-| PATCH  | /api/ofertas/estado/:id      | Cambiar estado (activa/inactiva)     |
-| PATCH  | /api/ofertas/remove/:id      | Simular eliminación (desactivar)     |
+| PATCH  | /api/ofertas/estado/:id      | Cambiar estado (activa/inactiva)      |
+| PATCH  | /api/ofertas/remove/:id      | Simular eliminación (desactivar)    
+                           |
+|--------|------------------------------|---------------------------------------|
+| POST   | /api/postulacion             | Crear una postulacion                 |
+| GET    | /api/postulacion             | Listar  todas postulaciones           |
+| PUT    | /api/postulacion/:id         | Editar una postulacion                |
+| PATCH  | /api/postulacion/estado/:id  | Cambiar estado (activa/inactiva)      |
+| PATCH  | /api/postulacion/remove/:id  | Simular eliminación (desactivar)      |
 
 ## Pruebas realizadas con:
 
