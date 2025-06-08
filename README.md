@@ -1,5 +1,5 @@
-Evaluación Unidad 2 - Backend API REST
-Este proyecto corresponde a la evaluación de la unidad 2 para el ramo de Desarrollo Backend. Se desarrolla una API RESTful enfocada en el perfil de Reclutador, permitiendo gestionar la entidad oferta_laboral.
+Evaluación Unidad 3 - Backend API REST
+Este proyecto corresponde a la evaluación de la unidad 3 para el ramo de Desarrollo Backend. Se desarrolla una API RESTful enfocada en el perfil de Reclutador, permitiendo gestionar la entidad oferta_laboral. en esta oportunidad de agrega Swagger
 
 Tecnologías utilizadas
 Node.js
