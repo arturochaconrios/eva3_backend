@@ -2,32 +2,29 @@ const db = require('../config/db');
 
 const Postulacion = {
     getAll: async () => {
-        const [rows] = await db.query('SELECT * FROM Postulacion');
+        const [rows] = await db.query('SELECT * FROM postulacion');
         return rows;
     },
-    getById: async (id) => {
-        const [rows] = await db.query('SELECT * FROM Postulacion WHERE id = ?', [id]);
-        return rows[0];
-    },
-    create: async (data) => {
-        const { candidato_id, oferta_laboral_id, estado_postulacion, comentario } = data;
+    create: async (postulacion) => {
         const [result] = await db.query(
-            'INSERT INTO Postulacion (candidato_id, oferta_laboral_id, estado_postulacion, comentario) VALUES (?, ?, ?, ?)',
-            [candidato_id, oferta_laboral_id, estado_postulacion || 'Postulando', comentario || null]
+            'INSERT INTO postulacion (candidato_id, oferta_laboral_id, estado_postulacion, fecha_postulacion, fecha_actualizacion) VALUES (?, ?, ?, ?, ?)',
+            [postulacion.candidato_id, postulacion.oferta_laboral_id, postulacion.estado_postulacion, postulacion.fecha_postulacion, postulacion.fecha_actualizacion]
         );
-        return { id: result.insertId, ...data };
+        return { id: result.insertId, ...postulacion };
     },
-    update: async (id, data) => {
-        const { estado_postulacion, comentario } = data;
-        await db.query(
-            'UPDATE Postulacion SET estado_postulacion = ?, comentario = ? WHERE id = ?',
-            [estado_postulacion, comentario, id]
+    update: async (postulacion) => {
+        const [rows] = await db.query(
+            'UPDATE postulacion SET estado_postulacion = ?, fecha_actualizacion = ? WHERE candidato_id = ? AND oferta_laboral_id = ?',
+            [postulacion.nuevo_estado_postulacion, postulacion.nueva_fecha_actualizada, postulacion.candidato_id, postulacion.oferta_laboral_id]
         );
-        return { id, ...data };
+        return rows.affectedRows > 0;
     },
-    remove: async (id) => {
-        await db.query('DELETE FROM Postulacion WHERE id = ?', [id]);
-        return { message: 'Postulación eliminada' };
+    remove: async (postulacion) => {
+        const [rows] = await db.query(
+            'DELETE FROM postulacion WHERE candidato_id = ? AND oferta_laboral_id = ?',
+            [postulacion.candidato_id, postulacion.oferta_laboral_id]
+        );
+        return rows.affectedRows > 0;
     }
 };
 

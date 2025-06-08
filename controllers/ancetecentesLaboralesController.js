@@ -1,12 +1,12 @@
-const Usuarios = require('../models/usuario');
+const AntecentesLaboral = require('../models/antecedentesLaborales').default;
 
 const getAll = async (req, res) => {
     try {
-       const result = await Usuarios.getAll();
+       const result = await AntecentesLaboral.getAll();
        console.log('resultado de la consulta:', result);
        res.status(200).json(result);
     } catch (err) {
-        console.error('Error en el controlador de usuarios:', err);
+        console.error('Error en el controlador de antecedentes laborales:', err);
         return res.status(500).json({
             error: 'Error interno del servidor'
         });
@@ -15,12 +15,12 @@ const getAll = async (req, res) => {
 
 const create = async (req, res) => {
     try{
-        const usuario = req.body;
-        const result = await Usuarios.create(usuario);
+        const antecedentelaboral = req.body;
+        const result = await AntecentesLaboral.create(antecedentelaboral);
         res.status(201).json(result);
     }
     catch (err) {
-        console.error('Error en el controlador de usuarios:', err);
+        console.error('Error en el controlador de antecedentes laborales:', err);
         return res.status(500).json({
             error: 'Error interno del servidor'
         });
@@ -29,12 +29,12 @@ const create = async (req, res) => {
 
 const update = async (req, res) => {
     try{
-        const usuario = req.body;
-        const result = await Usuarios.update(usuario);
+        const antecedentelaboral = req.body;
+        const result = await AntecentesLaboral.update(antecedentelaboral);
         res.status(200).json(result);
     }
     catch (err) {
-        console.error('Error en el controlador de usuarios:', err);
+        console.error('Error en el controlador de antecedentes laborales:', err);
         return res.status(500).json({
             error: 'Error interno del servidor'
         });
@@ -43,8 +43,8 @@ const update = async (req, res) => {
 
 const remove = async (req, res) => {
     try{
-        const usuario = req.body;
-        const result = await Usuarios.remove(usuario);
+        const antecedentelaboral = req.body;
+        const result = await AntecentesLaboral.remove(antecedentelaboral);
         res.status(200).json(result);
     }
     catch (err) {
@@ -55,7 +55,6 @@ const remove = async (req, res) => {
     }
 };
 
-
 module.exports = {
-    getAll,create,update,remove
+    getAll,update,create,remove
 }

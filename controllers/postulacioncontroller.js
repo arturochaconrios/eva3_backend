@@ -1,55 +1,61 @@
 const Postulacion = require('../models/postulacion');
 
-const listarPostulaciones = async (req, res, next) => {
+const getAll = async (req, res) => {
     try {
-        const postulaciones = await Postulacion.getAll();
-        res.json(postulaciones);
+       const result = await Postulacion.getAll();
+       console.log('resultado de la consulta:', result);
+       res.status(200).json(result);
     } catch (err) {
-        next(err);
+        console.error('Error en el controlador de Postulacion:', err);
+        return res.status(500).json({
+            error: 'Error interno del servidor'
+        });
     }
 };
 
-const obtenerPostulacion = async (req, res, next) => {
-    try {
-        const post = await Postulacion.getById(req.params.id);
-        if (!post) return res.status(404).json({ error: 'No encontrada' });
-        res.json(post);
-    } catch (err) {
-        next(err);
+const create = async (req, res) => {
+    try{
+        const postulacion = req.body;
+        const result = await Postulacion.create(postulacion);
+        res.status(201).json(result);
+    }
+    catch (err) {
+        console.error('Error en el controlador de postulacion:', err);
+        return res.status(500).json({
+            error: 'Error interno del servidor'
+        });
     }
 };
 
-const crearPostulacion = async (req, res, next) => {
-    try {
-        const nueva = await Postulacion.create(req.body);
-        res.status(201).json(nueva);
-    } catch (err) {
-        next(err);
+const update = async (req, res) => {
+    try{
+        const postulacion = req.body;
+        const result = await Postulacion.update(postulacion);
+        res.status(200).json(result);
+    }
+    catch (err) {
+        console.error('Error en el controlador de postulacion:', err);
+        return res.status(500).json({
+            error: 'Error interno del servidor'
+        });
     }
 };
 
-const actualizarPostulacion = async (req, res, next) => {
-    try {
-        const actualizada = await Postulacion.update(req.params.id, req.body);
-        res.json(actualizada);
-    } catch (err) {
-        next(err);
+const remove = async (req, res) => {
+    try{
+        const postulacion = req.body;
+        const result = await Postulacion.remove(postulacion);
+        res.status(200).json(result);
+    }
+    catch (err) {
+        console.error('Error en el controlador de postulacion:', err);
+        return res.status(500).json({
+            error: 'Error interno del servidor'
+        });
     }
 };
 
-const eliminarPostulacion = async (req, res, next) => {
-    try {
-        const resultado = await Postulacion.remove(req.params.id);
-        res.json(resultado);
-    } catch (err) {
-        next(err);
-    }
-};
 
 module.exports = {
-    listarPostulaciones,
-    obtenerPostulacion,
-    crearPostulacion,
-    actualizarPostulacion,
-    eliminarPostulacion
-};
+    getAll,create,update,remove
+}
