@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const antecedentesAcademicosController = require('../controllers/antecedentesAcademicosController');
+const controller = require('../controllers/antecedentesAcademicosController');
 
-
-// rutas para la API de antecedentes académicos
 /**
  * @swagger
  * tags:
@@ -13,7 +11,7 @@ const antecedentesAcademicosController = require('../controllers/antecedentesAca
 
 /**
  * @swagger
- * /:
+ * /api/antecedentesAcademicos:
  *   get:
  *     summary: Obtiene todos los antecedentes académicos
  *     tags: [AntecedentesAcademicos]
@@ -23,11 +21,11 @@ const antecedentesAcademicosController = require('../controllers/antecedentesAca
  *       500:
  *         description: Error al obtener la lista de antecedentes académicos
  */
-router.get('/', (req, res, next) => antecedentesAcademicosController.getAll(req, res, next));
+router.get('/', controller.getAll);
 
 /**
  * @swagger
- * /create:
+ * /api/antecedentesAcademicos:
  *   post:
  *     summary: Crea un nuevo antecedente académico
  *     tags: [AntecedentesAcademicos]
@@ -38,12 +36,21 @@ router.get('/', (req, res, next) => antecedentesAcademicosController.getAll(req,
  *           schema:
  *             type: object
  *             properties:
- *               campo1:
+ *               candidato_id:
+ *                 type: integer
+ *                 example: 1
+ *               institucion:
  *                 type: string
- *                 example: "Ejemplo de campo1"
- *               campo2:
+ *                 example: "Universidad X"
+ *               titulo_obtenido:
  *                 type: string
- *                 example: "Ejemplo de campo2"
+ *                 example: "Ingeniero"
+ *               anio_ingreso:
+ *                 type: integer
+ *                 example: 2020
+ *               anio_egreso:
+ *                 type: integer
+ *                 example: 2024
  *     responses:
  *       201:
  *         description: Antecedente académico creado correctamente
@@ -52,35 +59,11 @@ router.get('/', (req, res, next) => antecedentesAcademicosController.getAll(req,
  *       500:
  *         description: Error al crear el antecedente académico
  */
-router.post('/', (req, res, next) => antecedentesAcademicosController.create(req, res, next));
+router.post('/', controller.create);
 
 /**
  * @swagger
- * /id:
- *   get:
- *     summary: Obtiene un antecedente académico por ID
- *     tags: [AntecedentesAcademicos]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *           example: 1
- *         description: ID del antecedente académico a obtener
- *     responses:
- *       200:
- *         description: Antecedente académico obtenido correctamente
- *       404:
- *         description: Antecedente académico no encontrado
- *       500:
- *         description: Error al obtener el antecedente académico
- */
-router.get('/:id', (req, res, next) => antecedentesAcademicosController.getById(req, res, next));
-
-/**
- * @swagger
- * /update/id:
+ * /api/antecedentesAcademicos/{id}:
  *   put:
  *     summary: Actualiza un antecedente académico
  *     tags: [AntecedentesAcademicos]
@@ -91,7 +74,7 @@ router.get('/:id', (req, res, next) => antecedentesAcademicosController.getById(
  *         schema:
  *           type: integer
  *           example: 1
- *         description: ID del antecedente académico a actualizar
+ *         description: ID del candidato
  *     requestBody:
  *       required: true
  *       content:
@@ -99,10 +82,14 @@ router.get('/:id', (req, res, next) => antecedentesAcademicosController.getById(
  *           schema:
  *             type: object
  *             properties:
- *               campo1:
+ *               institucion:
  *                 type: string
- *               campo2:
+ *               titulo_obtenido:
  *                 type: string
+ *               anio_ingreso:
+ *                 type: integer
+ *               anio_egreso:
+ *                 type: integer
  *     responses:
  *       200:
  *         description: Antecedente académico actualizado correctamente
@@ -111,11 +98,11 @@ router.get('/:id', (req, res, next) => antecedentesAcademicosController.getById(
  *       500:
  *         description: Error al actualizar el antecedente académico
  */
-router.put('/:id', (req, res, next) => antecedentesAcademicosController.update(req, res, next));
+router.put('/:id', (req, res, next) => controller.update(req.params.id, req.body).then(result => res.json(result)).catch(next));
 
 /**
  * @swagger
- * /renove/id:
+ * /api/antecedentesAcademicos/{id}:
  *   delete:
  *     summary: Elimina un antecedente académico
  *     tags: [AntecedentesAcademicos]
@@ -126,7 +113,7 @@ router.put('/:id', (req, res, next) => antecedentesAcademicosController.update(r
  *         schema:
  *           type: integer
  *           example: 1
- *         description: ID del antecedente académico a eliminar
+ *         description: ID del candidato
  *     responses:
  *       200:
  *         description: Antecedente académico eliminado correctamente
@@ -135,6 +122,6 @@ router.put('/:id', (req, res, next) => antecedentesAcademicosController.update(r
  *       500:
  *         description: Error al eliminar el antecedente académico
  */
-router.delete('/:id', (req, res, next) => antecedentesAcademicosController.remove(req, res, next));
- 
+router.delete('/:id', (req, res, next) => controller.remove(req.params.id).then(result => res.json(result)).catch(next));
+
 module.exports = router;
