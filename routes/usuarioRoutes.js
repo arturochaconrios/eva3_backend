@@ -2,6 +2,31 @@ const express = require('express');
 const router = express.Router();
 const usuarioController = require('../controllers/usuarioController');
 
+
+/**
+ * @swagger
+ * tags:
+ *  name: UsuarioRoutes
+  *  description: Operaciones relacionadas con los usuarios
+ */
+ 
+ 
+/**
+ * @swagger
+ * /:
+ *  get:
+ *    summary: Obtiene todos los usuarios
+ *    tags: [UsuarioRoutes]
+ *    responses:
+ *     200:
+ *      description: Lista de usuarios obtenida correctamente
+ *     500:
+ *      description: Error al obtener la lista de usuarios
+ */
+
+
+
+
 // GET todos los usuarios
 router.get('/', (req, res, next) => usuarioController.getAll(req, res, next));
 

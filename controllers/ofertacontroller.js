@@ -1,7 +1,7 @@
-const db = require('../models/oferta');
+const Ofertas = require('../models/oferta');
 
 // POST: Crear una nueva oferta
-exports.crearOferta = async (req, res) => {
+const crearOferta = async (req, res) => {
     const { titulo, descripcion, requisitos, salario, fecha_publicacion } = req.body;
 
     if (!titulo || !descripcion || !requisitos || !salario || !fecha_publicacion) {
@@ -9,7 +9,7 @@ exports.crearOferta = async (req, res) => {
     }
 
     try {
-        const resultado = await db.create({
+        const resultado = await Ofertas.create({
             titulo,
             descripcion,
             requisitos,
@@ -25,23 +25,22 @@ exports.crearOferta = async (req, res) => {
 };
 
 // GET: Listar todas las ofertas
-exports.listarOfertas = async (req, res) => {
+const listarOfertas = async (req, res, next) => {
     try {
-        const ofertas = await db.getAll();
+        const ofertas = await Ofertas.getAll();
         res.status(200).json(ofertas);
     } catch (error) {
-        console.error('Error al listar ofertas:', error);
-        res.status(500).json({ error: 'Error del servidor' });
+        next(error);
     }
 };
 
 // PUT: Editar una oferta
-exports.editarOferta = async (req, res) => {
+const editarOferta = async (req, res) => {
     const { id } = req.params;
     const { titulo, descripcion, requisitos, salario, fecha_publicacion, estado } = req.body;
 
     try {
-        const resultado = await db.update({
+        const resultado = await Ofertas.update({
             id,
             titulo,
             descripcion,
@@ -58,7 +57,7 @@ exports.editarOferta = async (req, res) => {
 };
 
 // PATCH: Cambiar estado de la oferta (activa/inactiva)
-exports.actualizarEstado = async (req, res) => {
+const actualizarEstado = async (req, res) => {
     const { id } = req.params;
     const { estado } = req.body;
 
@@ -67,7 +66,7 @@ exports.actualizarEstado = async (req, res) => {
     }
 
     try {
-        const resultado = await db.desactiveUser({ id, estado });
+        const resultado = await Ofertas.desactiveUser({ id, estado });
         res.status(200).json({ mensaje: `Estado actualizado a ${estado}`, resultado });
     } catch (error) {
         console.error('Error al cambiar estado:', error);
@@ -76,10 +75,10 @@ exports.actualizarEstado = async (req, res) => {
 };
 
 // PATCH: Simular eliminación de oferta (marcar como inactiva)
-exports.marcarComoEliminada = async (req, res) => {
+const marcarComoEliminada = async (req, res) => {
     const { id } = req.params;
     try {
-        const resultado = await db.desactiveUser({ id, estado: 'inactiva' });
+        const resultado = await Ofertas.desactiveUser({ id, estado: 'inactiva' });
         res.status(200).json({ mensaje: 'Oferta laboral desactivada (simulación de eliminación)', resultado });
     } catch (error) {
         console.error('Error al eliminar (simular) oferta:', error);
@@ -87,4 +86,10 @@ exports.marcarComoEliminada = async (req, res) => {
     }
 };
 
-module.exports = {getAll,getById,create,update,remove,desactiveUser};
+module.exports = {
+    crearOferta,
+    listarOfertas,
+    editarOferta,
+    actualizarEstado,
+    marcarComoEliminada
+};

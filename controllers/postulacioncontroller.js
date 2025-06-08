@@ -1,6 +1,6 @@
 const Postulacion = require('../models/postulacion');
 
-exports.listarPostulaciones = async (req, res, next) => {
+const listarPostulaciones = async (req, res, next) => {
     try {
         const postulaciones = await Postulacion.getAll();
         res.json(postulaciones);
@@ -9,7 +9,7 @@ exports.listarPostulaciones = async (req, res, next) => {
     }
 };
 
-exports.obtenerPostulacion = async (req, res, next) => {
+const obtenerPostulacion = async (req, res, next) => {
     try {
         const post = await Postulacion.getById(req.params.id);
         if (!post) return res.status(404).json({ error: 'No encontrada' });
@@ -19,7 +19,7 @@ exports.obtenerPostulacion = async (req, res, next) => {
     }
 };
 
-exports.crearPostulacion = async (req, res, next) => {
+const crearPostulacion = async (req, res, next) => {
     try {
         const nueva = await Postulacion.create(req.body);
         res.status(201).json(nueva);
@@ -28,7 +28,7 @@ exports.crearPostulacion = async (req, res, next) => {
     }
 };
 
-exports.actualizarPostulacion = async (req, res, next) => {
+const actualizarPostulacion = async (req, res, next) => {
     try {
         const actualizada = await Postulacion.update(req.params.id, req.body);
         res.json(actualizada);
@@ -37,7 +37,7 @@ exports.actualizarPostulacion = async (req, res, next) => {
     }
 };
 
-exports.eliminarPostulacion = async (req, res, next) => {
+const eliminarPostulacion = async (req, res, next) => {
     try {
         const resultado = await Postulacion.remove(req.params.id);
         res.json(resultado);
@@ -45,4 +45,11 @@ exports.eliminarPostulacion = async (req, res, next) => {
         next(err);
     }
 };
-module.exports = {getAll,getById,create,update,remove,desactiveUser};
+
+module.exports = {
+    listarPostulaciones,
+    obtenerPostulacion,
+    crearPostulacion,
+    actualizarPostulacion,
+    eliminarPostulacion
+};
